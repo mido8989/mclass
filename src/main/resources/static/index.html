@@ -3,135 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CI/CD Demo - Spring Boot</title>
+    <title>CI/CD Demo - Spring Boot (Updated)</title>
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             margin: 0;
             padding: 20px;
-            background: #0f172a;
-            color: #e5e7eb;
+            background: #1e1b4b;
+            color: #e0e7ff;
         }
         .card {
             max-width: 900px;
             margin: 0 auto;
-            background: #020617;
+            background: #312e81;
             border-radius: 14px;
-            padding: 24px 28px;
+            padding: 28px;
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid #1e293b;
+            border: 1px solid #4338ca;
         }
         h1 {
             margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
         }
         h2 {
             margin-top: 1.6rem;
-            font-size: 1.2rem;
-            color: #38bdf8;
-        }
-        .tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            background: #1e293b;
-            margin-right: 6px;
-            margin-top: 6px;
-        }
-        .pipeline {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 12px 0 4px;
-            font-size: 0.9rem;
-        }
-        .step {
-            background: #020617;
-            border-radius: 999px;
-            border: 1px solid #1e293b;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .step span.icon { font-size: 1rem; }
-        ul {
-            padding-left: 18px;
-            font-size: 0.92rem;
-        }
-        footer {
-            margin-top: 1.6rem;
-            font-size: 0.8rem;
-            color: #9ca3af;
+            font-size: 1.25rem;
+            color: #7dd3fc;
         }
         .highlight {
-            color: #4ade80;
+            color: #a5f3fc;
             font-weight: 600;
         }
-        code {
-            background: #020617;
-            padding: 2px 5px;
-            border-radius: 4px;
+        .update-box {
+            margin-top: 20px;
+            padding: 12px 18px;
+            background: #4c1d95;
+            border-radius: 8px;
+            border: 1px solid #6d28d9;
+            font-size: 1rem;
+        }
+        footer {
+            margin-top: 2rem;
             font-size: 0.85rem;
-            border: 1px solid #1e293b;
+            color: #c7d2fe;
         }
     </style>
 </head>
 <body>
+
 <div class="card">
-    <h1>🚀 Spring Boot CI/CD Demo 페이지</h1>
+    <h1>🔥 Spring Boot CI/CD Demo — UPDATED VERSION 🔥</h1>
     <p>
-        이 페이지는 <code>src/main/resources/static/index.html</code> 에서 서빙되는<br>
-        <span class="highlight">CI/CD 테스트용 정적 페이지</span>입니다.
+        이 페이지는 <code>src/main/resources/static/index.html</code> 의<br>
+        <span class="highlight">업데이트된 테스트 페이지</span> 입니다.
     </p>
 
-    <h2>1. 이 프로젝트의 CI/CD 파이프라인</h2>
-    <div class="pipeline">
-        <div class="step"><span class="icon">🧑‍💻</span> <span>개발 &amp; Commit</span></div>
-        <div class="step"><span class="icon">🔁</span> <span>GitHub Push</span></div>
-        <div class="step"><span class="icon">⚙️</span> <span>Jenkins Build</span></div>
-        <div class="step"><span class="icon">🐳</span> <span>Docker Image 생성</span></div>
-        <div class="step"><span class="icon">☁️</span> <span>AWS EC2 배포</span></div>
+    <div class="update-box">
+        🚀 <strong>이 문장은 새로 수정한 문구입니다!</strong><br>
+        이 텍스트가 보이면 Jenkins → EC2 배포가 성공했다는 의미입니다.
     </div>
 
+    <h2>CI/CD Test Checklist</h2>
     <ul>
-        <li><strong>GitHub</strong> 에 코드 push → Webhook 으로 Jenkins 트리거</li>
-        <li><strong>Jenkins</strong> 가 Maven 빌드 &amp; 테스트 실행</li>
-        <li>빌드 성공 시 <strong>Docker Image</strong> 생성 후 컨테이너 실행</li>
-        <li><strong>AWS EC2</strong> 에서 Spring Boot 서비스 자동 재배포</li>
+        <li>이 페이지가 보이면 정적 리소스 서빙 OK</li>
+        <li>코드를 수정 후 push → Jenkins 자동 빌드?</li>
+        <li>EC2 8081 페이지에 변경 내용 반영?</li>
     </ul>
 
-    <h2>2. CI/CD 테스트 체크리스트</h2>
-    <ul>
-        <li>이 페이지가 보이면 👉 <span class="highlight">Spring Boot 정적 리소스 서빙 OK</span></li>
-        <li>코드를 수정하고 GitHub 에 push 했을 때:
-            <ul>
-                <li>Jenkins Job 이 자동으로 실행되는지?</li>
-                <li>빌드 후 새 버전의 페이지 내용이 EC2 에 반영되는지?</li>
-            </ul>
-        </li>
-        <li>Jenkins 콘솔 로그에서:
-            <ul>
-                <li>Maven 빌드 결과 확인 (✅ SUCCESS / ❌ FAILURE)</li>
-                <li>Docker 이미지 태그, 컨테이너 재시작 로그 확인</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h2>3. 현재 상태 메모 (직접 수정해서 사용하세요)</h2>
-    <ul>
-        <li>Git 저장소: <code>github.com/mido8989/mclass</code></li>
-        <li>브랜치: <code>main</code></li>
-        <li>Jenkins Job 이름: <code>spring-boot-cicd-demo</code> (예시)</li>
-        <li>배포 대상: <code>AWS EC2 (Amazon Linux + Docker)</code></li>
-    </ul>
+    <h2>📌 마지막 업데이트 시간:</h2>
+    <p style="font-size: 1.1rem; color:#f9fafb;">
+        <strong>🔥 Updated at: 2025-11-22 — Test Build</strong>
+    </p>
 
     <footer>
-        마지막 배포 확인용 텍스트입니다.<br>
-        이 문구를 살짝 바꿔서 commit &amp; push 하면<br>
-        CI/CD 파이프라인이 잘 동작하는지 바로 검증할 수 있습니다. 😉
+        계속 index.html 을 수정하며 CI/CD 파이프라인이 잘 동작하는지 검증하세요. 😊
     </footer>
 </div>
+
 </body>
 </html>
