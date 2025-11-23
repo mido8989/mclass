@@ -21,6 +21,13 @@ pipeline {
     stages {
 
         // Git 최신 소스 코드 가져오기
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
+        // Git 최신 소스 코드 가져오기
         stage('Git Checkout') {
             steps {
                 checkout scm
@@ -75,8 +82,8 @@ pipeline {
                             # stop/remove old container (ignore error)
                             docker rm -f ${CONTAINER_NAME} || true
 
-                            # build docker image
-                            docker build -t ${DOCKER_IMAGE} .
+                            # build docker image (NO CACHE 적용)
+                            docker build --no-cache -t ${DOCKER_IMAGE} .
 
                             # run new container
                             docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} ${DOCKER_IMAGE}
