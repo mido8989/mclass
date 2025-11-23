@@ -3,116 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CI/CD Demo - Spring Boot project (Enhanced)</title>
+    <title>Spring Boot CI/CD Status</title>
 
     <style>
         body {
             margin: 0;
-            padding: 32px;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #1e1b4b, #0f172a);
-            color: #e0e7ff;
+            padding: 40px;
+            font-family: "Inter", system-ui, sans-serif;
+            background: #0b1120;
+            color: #e2e8f0;
         }
 
-        .card {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(49, 46, 129, 0.95);
-            border-radius: 18px;
-            padding: 32px;
-            border: 1px solid rgba(99, 102, 241, 0.4);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+        .wrap {
+            max-width: 950px;
+            margin: auto;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 40px rgba(30, 41, 59, 0.6);
         }
 
         h1 {
             margin-top: 0;
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: #f0f9ff;
-            text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        h2 {
-            margin-top: 2rem;
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: #7dd3fc;
-            border-left: 4px solid #7dd3fc;
-            padding-left: 10px;
+        .section-title {
+            font-size: 1.3rem;
+            margin-top: 2.2rem;
+            color: #94a3b8;
+            border-left: 4px solid #38bdf8;
+            padding-left: 12px;
         }
 
-        .highlight {
-            color: #a5f3fc;
-            font-weight: 700;
-        }
-
-        .update-box {
-            margin-top: 24px;
-            padding: 16px 20px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            background: rgba(76, 29, 149, 0.8);
-            border-radius: 10px;
-            border: 1px solid rgba(109, 40, 217, 0.5);
-            box-shadow: inset 0 0 15px rgba(109, 40, 217, 0.3);
+        .box {
+            background: rgba(51, 65, 85, 0.45);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            margin-top: 16px;
         }
 
         ul li {
-            margin: 10px 0;
-            font-size: 1rem;
+            line-height: 1.7;
+            margin: 6px 0;
+        }
+
+        .success {
+            color: #4ade80;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .timestamp {
+            margin-top: 14px;
+            padding: 12px 16px;
+            width: fit-content;
+            background: #1e293b;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            border: 1px solid rgba(148, 163, 184, 0.3);
         }
 
         footer {
-            margin-top: 2.5rem;
-            font-size: 0.9rem;
-            color: #c7d2fe;
-            opacity: 0.85;
+            margin-top: 28px;
             text-align: center;
+            opacity: 0.7;
         }
     </style>
 </head>
 
 <body>
+<div class="wrap">
 
-<div class="card">
-    <h1>🚀 Spring Boot CI/CD Demoo — Enhanced Edition</h1>
+    <h1>🛰 Spring Boot — CI/CD Status Dashboard</h1>
 
-    <p>
-        이 페이지는 <code>src/main/resources/static/index.html</code> 의  
-        <span class="highlight">최신 업데이트 버전</span>입니다.
-    </p>
-
-    <div class="update-box">
-        ✨ <strong>이 문장은 새롭게 배포된 문구입니다!</strong><br>
-        이 텍스트가 정상적으로 보인다면  
-        <strong>GitHub → Jenkins Build → Deploy to EC2</strong>  
-        전체 파이프라인이 성공적으로 동작한 것입니다.
+    <div class="box">
+        <p>
+            아래 정보는 EC2 서버에 배포된  
+            <strong>Spring Boot CI/CD 자동화 결과</strong>를 나타냅니다.
+        </p>
+        <p>
+            수정된 <code>index.html</code> 파일이 정상적으로 표시되면  
+            <span class="success">CI/CD 전체 파이프라인이 성공</span>했음을 의미합니다.
+        </p>
     </div>
 
-    <h2>CI/CD Verification Checklist</h2>
+    <h2 class="section-title">1. Deployment Pipeline</h2>
     <ul>
-        <li>정적 리소스(index.html) 업데이트 반영 여부</li>
-        <li>코드 수정 후 Git push → Jenkins 자동 빌드 트리거</li>
-        <li>EC2 8081 포트에서 HTML 최신 버전 출력 확인</li>
-        <li>Jenkins → EC2 SSH Deploy 성공 여부</li>
+        <li>GitHub Push → Jenkins Webhook Trigger</li>
+        <li>Jenkins Maven Build (Test Skip)</li>
+        <li>Docker Image Build on EC2</li>
+        <li>Existing Container Termination → New Container Run</li>
+        <li>Live Deployment on port 8081</li>
     </ul>
 
-    <h2>📌 Last Deployment Timestamp</h2>
-    <p style="font-size: 1.15rem; color:#f8fafc; font-weight: 600;">
-        🔥 Updated at: <strong>2025-11-23 — CI/CD Enhanced Build</strong>
-    </p>
+    <h2 class="section-title">2. What Was Updated?</h2>
+    <ul>
+        <li>HTML 디자인 및 문구 최신화</li>
+        <li>CI/CD 성공 상태 정보 표시</li>
+        <li>배포 타임스탬프 업데이트</li>
+    </ul>
 
-    <footer>
-        ※ index.html 을 지속적으로 수정하여 파이프라인의 안정성과 자동화를 확인해보세요!
-    </footer>
+    <h2 class="section-title">3. Deployment Timestamp</h2>
+    <div class="timestamp">
+        ⏱ Updated: <strong>2025-11-23  —  Production Build</strong>
+    </div>
+
+    <footer>© 2025 Spring Boot CI/CD Demo — 자동화된 배포 테스트 페이지</footer>
 </div>
-
 </body>
 </html>
