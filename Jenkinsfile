@@ -42,13 +42,11 @@ pipeline {
             steps {
                 sshagent(credentials: [env.SSH_CREDENTIALS_ID]) {
 
-                    // Create remote directory
                     sh """
                         ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-                        ${REMOTE_USER}@${REMOTE_HOST} "mkdir -p ${REMOTE_DIR}/"
+                        ${REMOTE_USER}@${REMOTE_HOST} "mkdir -p ${REMOTE_DIR}"
                     """
 
-                    // Copy JAR + Dockerfile
                     sh """
                         scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
                         ${JAR_FILE_NAME} Dockerfile \
@@ -61,22 +59,21 @@ pipeline {
         stage('Remote Docker Build & Deploy') {
             steps {
                 sshagent(credentials: [env.SSH_CREDENTIALS_ID]) {
+
                     sh """
-                        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-                        ${REMOTE_USER}@${REMOTE_HOST} << 'ENDSSH'
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${REMOTE_USER}@${REMOTE_HOST} << ENDSSH
+cd ${REMOTE_DIR} || exit 1
 
-                            cd ${REMOTE_DIR} || exit 1
+echo ">>> Stopping old container..."
+docker rm -f ${CONTAINER_NAME} || true
 
-                            echo ">>> Stopping old container (if exists)..."
-                            docker rm -f ${CONTAINER_NAME} || true
+echo ">>> Building image..."
+docker build --no-cache -t ${DOCKER_IMAGE} .
 
-                            echo ">>> Building Docker image (NO CACHE)..."
-                            docker build --no-cache -t ${DOCKER_IMAGE} .
+echo ">>> Starting new container..."
+docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} ${DOCKER_IMAGE}
 
-                            echo ">>> Running new container..."
-                            docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} ${DOCKER_IMAGE}
-
-                        ENDSSH
+ENDSSH
                     """
                 }
             }
