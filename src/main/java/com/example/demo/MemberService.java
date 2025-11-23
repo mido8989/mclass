@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-// check
+// check items
 @Service
 @RequiredArgsConstructor
 public class MemberService {
