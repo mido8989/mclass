@@ -83,12 +83,8 @@ pipeline {
 
                             # run new container
                             docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} ${DOCKER_IMAGE}
-                        ENDSSH
+        ENDSSH
                     """
                 }
             }
         }
-
-
-    }
-}
